@@ -1,0 +1,10 @@
+# Ignore Docker volumes / bind mount artifacts
+src/vendor/
+src/node_modules/
+src/storage/
+src/bootstrap/cache/
+
+# Docker / Laravel runtime stuff
+.env
+docker-compose.override.yml
+*.log

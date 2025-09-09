@@ -8,6 +8,7 @@ RUN apk update && apk add --no-cache \
     bash \
     git \
     curl \
+    netcat-openbsd \
     libpng-dev \
     libjpeg-turbo-dev \
     freetype-dev \
@@ -42,6 +43,15 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Clean up build dependencies (optional)
 RUN apk del g++ make autoconf build-base
+
+# Copy entrypoint script
+COPY ./dockerfiles/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# Make it executable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set as entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # Default user
 USER www-data
